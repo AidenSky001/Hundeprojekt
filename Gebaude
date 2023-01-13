@@ -1,0 +1,16 @@
+package Test;
+
+public class Gebaeude {
+	public int nummer;
+	public double hoehe;
+	public String beschreibung;
+	public Gebaeude(int nummer, double hoehe, String beschreibung) {
+	this.nummer=nummer;
+	this.hoehe=hoehe;
+	this.beschreibung=beschreibung;
+	}
+	@Override
+	public String toString() {
+		return "[" + nummer + ";" + hoehe + ";" + beschreibung + "]";
+	}
+}
