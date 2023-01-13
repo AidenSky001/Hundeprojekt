@@ -1,0 +1,51 @@
+package Test;
+
+public class Hund implements Tiere{
+	
+	//Attribute 
+	private int alter;
+	private String name;
+	private String besitzer;
+	private String rasse;
+	private boolean kannbellen;
+	
+	
+	//Konstruktor
+	public Hund(int alter, String name, String besitzer, String rasse, boolean kannbellen) {
+		this.alter = alter;
+		this.name = name;
+		this.besitzer = besitzer;
+		this.rasse = rasse;
+		this.kannbellen = kannbellen;
+		
+	}
+	
+	public int getAlter() {
+		return alter;
+	}
+	
+	public void setAlter(int alter) {
+		this.alter = alter;
+	}
+	//Methoden
+	public void bellen(String bell) {
+		System.out.println(bell);
+		
+	}
+	
+	public void plusrechnen(int zahl1, int zahl2) {
+		System.out.println(zahl1 + zahl2);
+	}
+	
+	public void test(boolean kannbellen, String bell) {
+		
+		if (kannbellen) {
+			bellen(bell);
+		}
+	}
+
+	@Override
+	public void leben() {
+		
+	}
+}
