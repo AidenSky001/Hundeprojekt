@@ -1,0 +1,20 @@
+package Test;
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+
+public class testKlasseMitFunktion {
+
+	@Test
+	 public void testBuchstabeVoranstellen() {
+	    String result = KlasseMitFunktion.buchstabeVoranstellen("Test", "A");
+	    assertEquals("ATest", result);
+	}
+	
+}
+
+//Sachen zum Überprüfen
+
+assertEquals: Überprüft, ob zwei Werte gleich sind.
+assertTrue/assertFalse: Überprüft, ob ein Boolescher Wert wahr oder falsch ist.
+assertNull/assertNotNull: Überprüft, ob ein Wert null oder nicht null ist.

@@ -1,0 +1,180 @@
+package Test;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Comparator;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+        //Beispiel für HashMaps
+        
+        Map <String, String> map = new HashMap<>(); //(Key, Value)
+        map.put("Apfel", "Rot");
+        map.put("Birne", "Grün"); //Achtung nicht einen Key mit mehreren unterschiedlichen Values beschreiben!
+        map.remove("Birne");
+        System.out.println(map.get("Apfel")); //Hier würde die Ausgabe Rot kommen
+        
+        Set <String >keySet = map.keySet();
+        for (Integer s : keySet) {
+            System.out.println("Die Frucht" + s + "hat die Farbe" + map.get(s) + ".");
+        }
+    
+		
+		Hund milo = new Hund(0, null, null, null, false);
+		milo.bellen("WauWau");
+		milo.setAlter(7);
+		milo.bell();
+		System.out.println(milo.getAlter());
+		
+	//Beispiel für Anonyme Klasse
+		Hund Rex = new Hund(0, null, null, null, false){
+		public void bell() {
+			System.out.println("Auuuu");
+		}
+		};
+		Rex.bell(); //Hier kommt jetzt das Auuu statt dem Wuff
+		
+		//ArrayListe 
+		List<Gebaeude> gebaeudeliste = new ArrayList<Gebaeude>();
+		gebaeudeliste.add(new Gebaeude(1, 15.0, "Betriebsgebaeude"));
+		gebaeudeliste.add(new Gebaeude(2, 21.0, "Wohngebaeude"));
+		gebaeudeliste.add(new Gebaeude(3, 18.0, "Verteilstation"));
+		
+		Collections.sort(gebaeudeliste, new Comparator<Gebaeude>() {
+		      @Override
+		      public int compare(Gebaeude haus1, Gebaeude haus2) {
+		        return Integer.compare(haus1.nummer, haus2.nummer);
+		      }
+		    });
+		    for (Gebaeude gebaude : gebaeudeliste) {
+		      System.out.println(gebaude.nummer + ", " + gebaude.hoehe + ", " + gebaude.beschreibung);
+		    }
+		
+		Collections.sort(gebaeudeliste, Collections.reverseOrder()); //Das geht nur für Zahlen
+		Collections.sort(Nummern);
+		System.out.println(gebaeudeliste);
+		
+		
+		//Liste in eine Datei schreiben
+        ListToFile.writeListToFile(gebaeudeliste, "data.txt");
+        FileReaderBeispiel.readAndPrintFile("data.txt");
+        
+	}
+		
+        
+	}
+	
+	public class ListToFile {
+	    public static void writeListToFile(List<Gebaeude> gebeaudeliste, String data) {
+	        try {
+	        	BufferedWriter writer = new BufferedWriter(new FileWriter(data));
+	            for (Gebaeude obj : gebeaudeliste) {
+	                writer.write(obj.toString());
+	                writer.newLine();
+	            }
+	            writer.close();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	    //Datei Auslesen
+	    public class FileReaderBeispiel {
+	        public static void readAndPrintFile(String fileName) {
+	            try {
+	                BufferedReader reader = new BufferedReader(new FileReader(fileName));
+	                String line;
+	                while ((line = reader.readLine()) != null) {
+	                    System.out.println(line);
+	                }
+	                reader.close();
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
+
+	}
+	
+	  //Hier kommt ein Beispiel zu Abstrakten Klassen
+	    public class AbstractClassBsp {
+
+	        public static void main(String[] args) {
+	            Norton nortonv1 = new Norton();
+	            System.out.println("Ausgangspunkt: " + nortonv1.getPos().x);
+	            nortonv1.fahre(10);
+	            System.out.println("Fahrtziel: " + nortonv1.getPos().x);
+	            
+	            // Luftfahrzeug lfz = new Luftfahrzeug();    // Fehler
+	            
+	            Cesna cesna = new Cesna();
+	            cesna.bewegDich(2000, 150);
+	            System.out.println("Flugziel: " + cesna.getPos().x + ", Hoehe: " + cesna.getPos().y);
+	        }
+	    }
+
+	    abstract class Fahrzeug {
+	        Point pos = new Point(0,0);
+	        
+	        abstract void bewegDich(int h, int v);
+	        
+	        Point getPos() {
+	            return pos;
+	        }
+	    }
+
+	    abstract class Motorrad extends Fahrzeug {
+	        //...
+	    }
+
+	    class Norton extends Motorrad {
+
+	        @Override
+	        void bewegDich(int h, int v) {
+	            pos = new Point(h, v);
+	        }
+	        
+	        void fahre(int h){
+	            bewegDich(h, 0);
+	        }
+	    }
+
+	    abstract class Luftfahrzeug extends Fahrzeug {
+	        Point fliege(int h, int v) {
+	            return new Point(getPos().x + h, getPos().y + v);
+	        }
+	    }
+
+	    class Cesna extends Luftfahrzeug {
+	        @Override
+	        void bewegDich(int h, int v) {
+	            pos = fliege(h, v);
+	        }
+	    } 
+	    
+	  //Beispiel für Destruktor
+	    public class Dest_java {  
+	        public static void main(String[] args) {  
+	            Dest_java des = new Dest_java();  
+	            des.finalize();  
+	            des = null;  
+	            System.gc();  
+	            System.out.print("main() method ");  
+	        }  
+	        protected void finalize() {  
+	            System.out.print("Destroyed ");  
+	        }  
+	    }  
+	    
+	    
+	    
+}
